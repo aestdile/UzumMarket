@@ -402,6 +402,241 @@ namespace UzumMarket.Services
         }
 
 
+        /* ------------------- UpdateProducts ---------------------- */
+
+        public string UpdateProduct()
+        {
+            List<Product> products = ProductService.Products;
+            if (products.Count <= 0)
+            {
+                return "No products available";
+            }
+            Console.WriteLine("---------------- Available Products -----------------------");
+            foreach (var product in products)
+            {
+                Console.WriteLine
+                (
+                    $" Id: {product.Id},\n" +
+                    $" Name: {product.Name},\n" +
+                    $" Description: {product.Description},\n" +
+                    $" Price: {product.Price},\n" +
+                    $" Category: {product.Category},\n" +
+                    $" Factory: {product.FactoryName},\n" +
+                    $" Made Date: {product.MadeDate},\n" +
+                    $" Expire Date: {product.ExpireDate}"
+                );
+            }
+
+            Console.WriteLine("Enter the ID of the product you want to update: ");
+            string idInput = Console.ReadLine();
+            Guid id;
+            if (!Guid.TryParse(idInput, out id))
+            {
+                return "Invalid ID format";
+            }
+
+            Product productToUpdate = products.FirstOrDefault(p => p.Id == id);
+            if (productToUpdate == null)
+            {
+                return "Product not found";
+            }
+
+            Console.WriteLine("Enter the new name for the product: ");
+            string newName = Console.ReadLine();
+            while (true)
+            {
+                if (string.IsNullOrWhiteSpace(newName))
+                {
+                    return "Name cannot be empty";
+                }
+                else if (newName.Length < 3 || newName.Length > 20)
+                {
+                    return "Name must be between 3 and 20 characters";
+                }
+                else if (!char.IsUpper(newName[0]))
+                {
+                    return "Name must start with an uppercase letter";
+                }
+                else if (newName.Any(char.IsDigit))
+                {
+                    return "Name cannot contain numbers";
+                }
+                else if (newName.Any(char.IsSymbol))
+                {
+                    return "Name cannot contain symbols";
+                }
+                else
+                {
+                    break;
+                }
+                Console.WriteLine("Please, enter again! Name: ");
+                newName = Console.ReadLine();
+            }
+            productToUpdate.Name = newName;
+
+            Console.WriteLine("Enter the new description for the product: ");
+            string newDescription = Console.ReadLine();
+            while (true)
+            {
+                if (string.IsNullOrWhiteSpace(newDescription))
+                {
+                    return "Description cannot be empty";
+                }
+                else if (newDescription.Length < 3 || newDescription.Length > 20)
+                {
+                    return "Description must be between 3 and 20 characters";
+                }
+                else if (!char.IsUpper(newDescription[0]))
+                {
+                    return "Description must start with an uppercase letter";
+                }
+                else if (newDescription.Any(char.IsDigit))
+                {
+                    return "Description cannot contain numbers";
+                }
+                else if (newDescription.Any(char.IsSymbol))
+                {
+                    return "Description cannot contain symbols";
+                }
+                else
+                {
+                    break;
+                }
+                Console.WriteLine("Please, enter again! Description: ");
+                newDescription = Console.ReadLine();
+            }
+            productToUpdate.Description = newDescription;
+
+            Console.WriteLine("Enter the new price for the product: ");
+            string priceInput = Console.ReadLine();
+            decimal price;
+            if (!decimal.TryParse(priceInput, out price))
+            {
+                return "Invalid price format";
+            }
+            if (price < 0)
+            {
+                return "Price cannot be negative";
+            }
+            productToUpdate.Price = price;
+
+            Console.WriteLine("Enter the new category for the product: ");
+            string newCategory = Console.ReadLine();
+            while (true)
+            {
+                if (string.IsNullOrWhiteSpace(newCategory))
+                {
+                    return "Category cannot be empty";
+                }
+                else if (newCategory.Length < 3 || newCategory.Length > 20)
+                {
+                    return "Category must be between 3 and 20 characters";
+                }
+                else if (!char.IsUpper(newCategory[0]))
+                {
+                    return "Category must start with an uppercase letter";
+                }
+                else if (newCategory.Any(char.IsDigit))
+                {
+                    return "Category cannot contain numbers";
+                }
+                else if (newCategory.Any(char.IsSymbol))
+                {
+                    return "Category cannot contain symbols";
+                }
+                else
+                {
+                    break;
+                }
+                Console.WriteLine("Please, enter again! Category: ");
+                newCategory = Console.ReadLine();
+            }
+            productToUpdate.Category = newCategory;
+
+
+            Console.WriteLine("Enter the new factory name for the product: ");
+            string newFactoryName = Console.ReadLine();
+            while (true)
+            {
+                if (string.IsNullOrWhiteSpace(newFactoryName))
+                {
+                    return "Factory name cannot be empty";
+                }
+                else if (newFactoryName.Length < 3 || newFactoryName.Length > 20)
+                {
+                    return "Factory name must be between 3 and 20 characters";
+                }
+                else if (!char.IsUpper(newFactoryName[0]))
+                {
+                    return "Factory name must start with an uppercase letter";
+                }
+                else if (newFactoryName.Any(char.IsDigit))
+                {
+                    return "Factory name cannot contain numbers";
+                }
+                else if (newFactoryName.Any(char.IsSymbol))
+                {
+                    return "Factory name cannot contain symbols";
+                }
+                else
+                {
+                    break;
+                }
+                Console.WriteLine("Please, enter again! Factory Name: ");
+                newFactoryName = Console.ReadLine();
+            }
+            productToUpdate.FactoryName = newFactoryName;
+
+
+            Console.WriteLine("Enter the new made date for the product (yyyy-mm-dd): ");
+            string madeDateInput = Console.ReadLine();
+            DateTime madeDate;
+            if (!DateTime.TryParse(madeDateInput, out madeDate))
+            {
+                return "Invalid made date format";
+            }
+            if (madeDate > DateTime.Now)
+            {
+                return "Made date cannot be in the future";
+            }
+            productToUpdate.MadeDate = madeDate;
+
+
+            Console.WriteLine("Enter the new expire date for the product (yyyy-mm-dd): ");
+            string expireDateInput = Console.ReadLine();
+            DateTime expireDate;
+            if (!DateTime.TryParse(expireDateInput, out expireDate))
+            {
+                return "Invalid expire date format";
+            }
+            if (expireDate < DateTime.Now)
+            {
+                return "Expire date cannot be in the past";
+            }
+            productToUpdate.ExpireDate = expireDate;
+            productToUpdate.IsExpired = expireDate < DateTime.Now;
+            if (productToUpdate.IsExpired)
+            {
+                return "Product is expired";
+            }
+            Console.WriteLine("Enter the new count for the product: ");
+            string countInput = Console.ReadLine();
+            int count;
+            if (!int.TryParse(countInput, out count))
+            {
+                return "Invalid count format";
+            }
+            if (count < 0)
+            {
+                return "Count cannot be negative";
+            }
+            productToUpdate.Count = count;
+            Console.WriteLine("Product updated successfully!");
+
+            return "UpdateProduct management is successful";
+        }
+
+
 
 
 
@@ -454,11 +689,7 @@ namespace UzumMarket.Services
             throw new NotImplementedException();
         }
 
-        public string UpdateProduct()
-        {
-            throw new NotImplementedException();
-        }
-
+      
         
     }
 }
