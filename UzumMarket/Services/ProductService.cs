@@ -706,14 +706,22 @@ namespace UzumMarket.Services
             }
         }
 
+
+
+        /* --------------- Get Product By Id ------------------- */
+
         public Product GetProductById(Guid Id)
         {
-            throw new NotImplementedException();
+            Product product = Products.FirstOrDefault(p => p.Id == Id);
+            if (product != null)
+            {
+                return product;
+            }
+            else
+            {
+                Console.WriteLine("Product not found!");
+                return null;
+            }
         }
-
-        
-
-        
-        
     }
 }
