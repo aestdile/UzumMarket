@@ -670,15 +670,33 @@ namespace UzumMarket.Services
             }
         }
 
+
+
+        /* ----------------- Get Product By Category --------------------  */
+
+        public List<Product> GetProductsByCategory(string category)
+        {
+            List<Product> productsByCategory = Products.Where(p => p.Category.Equals(category, StringComparison.OrdinalIgnoreCase)).ToList();
+            if (productsByCategory.Count > 0)
+            {
+                return productsByCategory;
+            }
+            else
+            {
+                Console.WriteLine("No products found in this category.");
+                return null;
+            }
+        }
+
+
+
+
         public Product GetProductById(Guid Id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Product> GetProductsByCategory(string category)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public List<Product> GetProductsByFactory(string factoryName)
         {
