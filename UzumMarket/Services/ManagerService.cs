@@ -637,15 +637,60 @@ namespace UzumMarket.Services
         }
 
 
+        /* ------------------- DeleteProducts ---------------------- */
+
+        public string DeleteProduct()
+        {
+            List<Product> products = ProductService.Products;
+            if (products.Count <= 0)
+            {
+                return "No products available";
+            }
+            Console.WriteLine("---------------- Available Products -----------------------");
+            foreach (var product in products)
+            {
+                Console.WriteLine
+                (
+                    $" Id: {product.Id},\n" +
+                    $" Name: {product.Name},\n" +
+                    $" Description: {product.Description},\n" +
+                    $" Price: {product.Price},\n" +
+                    $" Category: {product.Category},\n" +
+                    $" Factory: {product.FactoryName},\n" +
+                    $" Made Date: {product.MadeDate},\n" +
+                    $" Expire Date: {product.ExpireDate}"
+                );
+            }
+
+            Console.WriteLine("Enter the ID of the product you want to delete: ");
+            string idInput = Console.ReadLine();
+            Guid id;
+            if (!Guid.TryParse(idInput, out id))
+            {
+                return "Invalid ID format";
+            }
+
+            Product productToDelete = products.FirstOrDefault(p => p.Id == id);
+            if (productToDelete == null)
+            {
+                return "Product not found";
+            }
+            if (productToDelete.IsExpired)
+            {
+                return "Product is expired and cannot be deleted";
+            }
+            products.Remove(productToDelete);
+            Console.WriteLine($"Product with ID {id} has been deleted successfully.");
+            Console.WriteLine("Product deleted successfully!");
+
+
+            return "DeleteProduct management is successful";
+        }
+
 
 
 
         public string DeleteOrder()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string DeleteProduct()
         {
             throw new NotImplementedException();
         }
