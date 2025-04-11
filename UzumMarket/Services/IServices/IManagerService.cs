@@ -9,6 +9,7 @@ namespace UzumMarket.Services.IServices
         public string ManageSeller();
         public string GetAllSellers();
         public string UpdateSalaryOfSellers();
+        public string UpdatePositionOfSellers();
         public string DeleteSeller();
         public string ManageCustomer();
         public string GetAllCustomers();

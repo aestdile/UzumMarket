@@ -1075,5 +1075,78 @@ namespace UzumMarket.Services
         }
 
 
+
+        /* ------------------- UpdatePositionOfSellers ---------------------- */
+
+        public string UpdatePositionOfSellers()
+        {
+            List<Seller> sellers = SellerService.Sellers;
+
+
+            Console.WriteLine("---------------- Available Sellers -----------------------\n");
+
+            foreach (var item in sellers)
+            {
+                Console.WriteLine
+                (
+                    $" Id: {item.Id},\n" +
+                    $" First Name: {item.FirstName},\n" +
+                    $" Last Name: {item.LastName},\n" +
+                    $" Password: {item.Password},\n" +
+                    $" Email: {item.Email},\n" +
+                    $" Position: {item.Position},\n" +
+                    $" Salary: {item.Salary}"
+                );
+            }
+
+            Console.WriteLine("Enter the new position for the seller: ");
+            string newPosition = Console.ReadLine();
+            while (true)
+            {
+                if (string.IsNullOrWhiteSpace(newPosition))
+                {
+                    return "Position cannot be empty";
+                }
+                else if (newPosition.Length < 3 || newPosition.Length > 20)
+                {
+                    return "Position must be between 3 and 20 characters";
+                }
+                else if (!char.IsUpper(newPosition[0]))
+                {
+                    return "Position must start with an uppercase letter";
+                }
+                else if (newPosition.Any(char.IsDigit))
+                {
+                    return "Position cannot contain numbers";
+                }
+                else if (newPosition.Any(char.IsSymbol))
+                {
+                    return "Position cannot contain symbols";
+                }
+                else
+                {
+                    break;
+                }
+                Console.WriteLine("Please, enter again! Position: ");
+                newPosition = Console.ReadLine();
+            }
+
+            Console.WriteLine("Enter the ID of the seller you want to UpdatePosition: ");
+            string idInput = Console.ReadLine();
+            Guid id;
+            if (!Guid.TryParse(idInput, out id))
+            {
+                return "Invalid ID format";
+            }
+            Seller seller = sellers.FirstOrDefault(s => s.Id == id);
+            if (seller == null)
+            {
+                return "Seller not found";
+            }
+            seller.Position = newPosition;
+
+
+            return "UpdatePositionOfSeller management is succesfully";
+        }
     }
 }
