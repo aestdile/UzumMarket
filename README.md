@@ -31,4 +31,4 @@ Loyihaning foydalanuvchi interfeysi zamonaviy, minimalist uslubda ishlab chiqilg
 
 1. **Kodni klonlash:**
    ```bash
-   git clone https://github.com/aestdile/uzum-market.git
+   git clone https://github.com/aestdile/UzumMarket.git
