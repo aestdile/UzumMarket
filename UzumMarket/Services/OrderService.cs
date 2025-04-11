@@ -163,9 +163,10 @@ namespace UzumMarket.Services
             }
         }
 
+        /* ---------------- GetAllOrders -------------------- */
         public List<Order> GetAllOrders()
         {
-            throw new NotImplementedException();
+            return Orders;
         }
 
         public Order GetOrderById(Guid Id)
