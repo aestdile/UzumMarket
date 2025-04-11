@@ -863,6 +863,136 @@ namespace UzumMarket.Services
 
 
 
+        /* ------------------- Register ---------------------- */
+
+        public string Register(Manager manager)
+        {
+            /* --------------- FirstName ---------------- */
+            Console.Write("First Name: ");
+            string firstName = Console.ReadLine();
+            while (true)
+            {
+                if (string.IsNullOrWhiteSpace(firstName))
+                {
+                    Console.WriteLine("First Name can not be empty. Please try again: ");
+                }
+                else if (firstName.Length is < 3 or > 20)
+                {
+                    Console.WriteLine("First Name must be between 3 and 20 characters. Please try agai: ");
+                }
+                else if (!char.IsUpper(firstName[0]))
+                {
+                    Console.WriteLine("First Name must start with an uppercase letter. Please try again: ");
+                }
+                else if (firstName.Any(char.IsDigit))
+                {
+                    Console.WriteLine("First Name can not contain numbers. Please try again: ");
+                }
+                else if (firstName.Any(char.IsSymbol))
+                {
+                    Console.WriteLine("First Name can not contain symbols. Please try again: ");
+                }
+                else
+                {
+                    manager.FirstName = firstName;
+                    break;
+                }
+                firstName = Console.ReadLine();
+            }
+
+            /* --------------- LastName ---------------- */
+
+            Console.Write("Last Name: ");
+            string lastName = Console.ReadLine();
+            while (true)
+            {
+                if (string.IsNullOrWhiteSpace(lastName))
+                {
+                    Console.WriteLine("Last Name cannot be empty. Please try again: ");
+                }
+                else if (lastName.Length is < 3 or > 20)
+                {
+                    Console.WriteLine("Last Name must be between 3 and 20 characters. Please try again: ");
+                }
+                else if (!char.IsUpper(lastName[0]))
+                {
+                    Console.WriteLine("Last Name must start with an uppercase letter. Please try again: ");
+                }
+                else if (lastName.Any(char.IsDigit))
+                {
+                    Console.WriteLine("Last Name cannot contain numbers. Please try again: ");
+                }
+                else if (lastName.Any(char.IsSymbol))
+                {
+                    Console.WriteLine("Last Name cannot contain symbols. Please try again: ");
+                }
+                else
+                {
+                    manager.LastName = lastName;
+                    break;
+                }
+                lastName = Console.ReadLine();
+            }
+
+
+            /* --------------- Email ---------------- */
+
+            Console.Write("Email: ");
+            string email = Console.ReadLine();
+            while (true)
+            {
+                if (string.IsNullOrWhiteSpace(email))
+                {
+                    Console.WriteLine("Email cannot be empty. Please try again: ");
+                }
+                else if (!email.Contains("@") || !email.Contains("."))
+                {
+                    Console.WriteLine("Email must contain '@' and '.' characters. Please try again: ");
+                }
+                else
+                {
+                    manager.Email = email;
+                    break;
+                }
+                email = Console.ReadLine();
+            }
+
+
+            /* --------------- Password ---------------- */
+
+            Console.Write("Password: ");
+            string password = Console.ReadLine();
+            while (true)
+            {
+                if (string.IsNullOrWhiteSpace(password))
+                {
+                    Console.WriteLine("Password cannot be empty. Please try again: ");
+                }
+                else if (password.Length < 8)
+                {
+                    Console.WriteLine("Password must be at least 8 characters long. Please try again: ");
+                }
+                else if (!password.Any(char.IsDigit))
+                {
+                    Console.WriteLine("Password must contain at least one digit. Please try again: ");
+                }
+                else if (!password.Any(char.IsUpper))
+                {
+                    Console.WriteLine("Password must contain at least one uppercase letter. Please try again: ");
+                }
+                else
+                {
+                    manager.Password = password;
+                    break;
+                }
+                password = Console.ReadLine();
+            }
+
+            Managers.Add(manager);
+
+            return "Registration is successful!";
+        }
+
 
 
 
@@ -884,13 +1014,6 @@ namespace UzumMarket.Services
         
 
        
-
-        public string Register(Manager manager)
-        {
-            throw new NotImplementedException();
-        }
-
-        
       
         
     }
