@@ -145,9 +145,22 @@ namespace UzumMarket.Services
             }
         }
 
+        /* ---------------- DeleteOrder------------------ */
+
+
+
         public string DeleteOrder(Guid Id)
         {
-            throw new NotImplementedException();
+            Order order = Orders.Find(o => o.Id == Id);
+            if (order != null)
+            {
+                Orders.Remove(order);
+                return "Order deleted successfully";
+            }
+            else
+            {
+                return "Order not found";
+            }
         }
 
         public List<Order> GetAllOrders()
