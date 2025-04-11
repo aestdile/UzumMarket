@@ -99,6 +99,40 @@ namespace UzumMarket.Services
 
 
 
+        /* -------------------- Get All Sellers --------------------- */
+
+        public string GetAllSellers()
+        {
+
+
+            List<Seller> sellers = SellerService.Sellers;
+            if (sellers.Count <= 0)
+            {
+                return "No sellers available";
+            }
+
+            Console.WriteLine("---------------- Available Sellers -----------------------");
+            foreach (var item in sellers)
+            {
+                Console.WriteLine
+                (
+                    $" Id: {item.Id},\n" +
+                    $" First Name: {item.FirstName},\n" +
+                    $" Last Name: {item.LastName},\n" +
+                    $" Password: {item.Password},\n" +
+                    $" Email: {item.Email},\n" +
+                    $" Position: {item.Position},\n" +
+                    $" Salary: {item.Salary}"
+                );
+            }
+
+            return "GetAllSeller management is successful\n";
+        }
+
+
+
+
+
         public string DeleteCustomers()
         {
             throw new NotImplementedException();
@@ -134,10 +168,7 @@ namespace UzumMarket.Services
             throw new NotImplementedException();
         }
 
-        public string GetAllSellers()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public string Login()
         {
