@@ -10,11 +10,7 @@ namespace UzumMarket.Services
 {
     public class SellerService : ISellerService
     {
-        public List<Seller> GetAllSellers()
-        {
-            throw new NotImplementedException();
-        }
-
+        
         
 
         public string ManageProducts()
@@ -295,7 +291,11 @@ namespace UzumMarket.Services
         }
 
 
-
+        /* --------------- GetAllSellers ---------------- */
+        public List<Seller> GetAllSellers()
+        {
+            return Sellers;
+        }
 
 
 
