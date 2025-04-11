@@ -823,18 +823,53 @@ namespace UzumMarket.Services
 
 
 
+        /* ------------------- DeleteOrder ---------------------- */
+
         public string DeleteOrder()
         {
-            throw new NotImplementedException();
+            List<Order> orders = OrderService.Orders;
+            if (orders.Count <= 0)
+            {
+                return "No orders available";
+            }
+            Console.WriteLine("---------------- Available Orders -----------------------");
+            foreach (var order in orders)
+            {
+                Console.WriteLine
+                (
+                    $" Id: {order.Id},\n" +
+                    $" Product ID: {order.ProductId},\n" +
+                    $" Quantity: {order.Quantity},\n" +
+                    $" Order Date: {order.OrderDate}"
+                );
+            }
+
+            Console.WriteLine("Enter the ID of the order you want to delete: ");
+            string idInput = Console.ReadLine();
+            Guid id;
+            if (!Guid.TryParse(idInput, out id))
+            {
+                return "Invalid ID format";
+            }
+            Order orderToDelete = orders.FirstOrDefault(o => o.Id == id);
+            if (orderToDelete == null)
+            {
+                return "Order not found";
+            }
+            orders.Remove(orderToDelete);
+
+            return "DeleteOrder management is successful";
         }
 
-        
 
-       
-       
 
-       
-        
+
+
+
+
+
+
+
 
         public string Login()
         {
