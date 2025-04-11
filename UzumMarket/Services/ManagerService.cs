@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UzumMarket.Models;
 using UzumMarket.Models.Roles;
 using UzumMarket.Services.IServices;
 
@@ -370,8 +371,35 @@ namespace UzumMarket.Services
         }
 
 
+        /* ------------------- GetAllProducts ---------------------- */
 
 
+        public string GetAllProducts()
+        {
+
+            List<Product> products = ProductService.Products;
+            if (products.Count <= 0)
+            {
+                return "No products available";
+            }
+            Console.WriteLine("---------------- Available Products -----------------------");
+            foreach (var product in products)
+            {
+                Console.WriteLine
+                (
+                    $" Id: {product.Id},\n" +
+                    $" Name: {product.Name},\n" +
+                    $" Description: {product.Description},\n" +
+                    $" Price: {product.Price},\n" +
+                    $" Category: {product.Category},\n" +
+                    $" Factory: {product.FactoryName},\n" +
+                    $" Made Date: {product.MadeDate},\n" +
+                    $" Expire Date: {product.ExpireDate}"
+                );
+            }
+
+            return "GetAllProducts management is successful";
+        }
 
 
 
@@ -395,11 +423,7 @@ namespace UzumMarket.Services
             throw new NotImplementedException();
         }
 
-        public string GetAllProducts()
-        {
-            throw new NotImplementedException();
-        }
-
+       
         
 
         public string Login()
