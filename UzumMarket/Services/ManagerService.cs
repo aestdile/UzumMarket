@@ -995,26 +995,85 @@ namespace UzumMarket.Services
 
 
 
-
-
-
-
-
+        /* ------------------- Login ---------------------- */
 
         public string Login()
         {
-            throw new NotImplementedException();
+            /* --------------- Email ---------------- */
+
+            Console.Write("Email: ");
+            string email = Console.ReadLine();
+            while (true)
+            {
+                if (string.IsNullOrWhiteSpace(email))
+                {
+                    Console.WriteLine("Email cannot be empty. Please try again: ");
+                }
+                else if (!email.Contains("@") || !email.Contains("."))
+                {
+                    Console.WriteLine("Email must contain '@' and '.' characters. Please try again: ");
+                }
+                else
+                {
+                    break;
+                }
+                email = Console.ReadLine();
+            }
+
+
+            /* --------------- Password ---------------- */
+
+            Console.Write("Password: ");
+            string password = Console.ReadLine();
+            while (true)
+            {
+                if (string.IsNullOrWhiteSpace(password))
+                {
+                    Console.WriteLine("Password can not be empty!");
+                }
+                else if (password.Length < 8)
+                {
+                    Console.WriteLine("Password can not be less 8 characters!");
+                }
+                else if (!password.Any(char.IsUpper))
+                {
+                    Console.WriteLine("Password must contain at least one uppercase letter!");
+                }
+                else if (!password.Any(char.IsLower))
+                {
+                    Console.WriteLine("Password must contain at least one lowercase letter!");
+                }
+                else if (!password.Any(char.IsDigit))
+                {
+                    Console.WriteLine("Password must contain at leat one digit!");
+                }
+                else if (!password.Any(ch => "!@#$%^&*()-_=+[{]};:'\",<.>/?".Contains(ch)))
+                {
+                    Console.WriteLine("Password must contain at least one special character!");
+                }
+                else if (password.Contains(" "))
+                {
+                    Console.WriteLine("Password can not contain space!");
+                }
+                else
+                {
+                    break;
+                }
+                Console.Write("Please, enter again! Password: ");
+                password = Console.ReadLine();
+            }
+
+            var seller = Managers.FirstOrDefault(s => s.Email == email && s.Password == password);
+            if (seller != null)
+            {
+                return "Login is successfull!";
+            }
+            else
+            {
+                return "Invalid UserName or Password!";
+            }
         }
 
-        
 
-        
-
-        
-        
-
-       
-      
-        
     }
 }
