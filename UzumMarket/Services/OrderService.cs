@@ -169,9 +169,14 @@ namespace UzumMarket.Services
             return Orders;
         }
 
+
+
+
+        /* ----------------- GetOrderById ----------------- */
+
         public Order GetOrderById(Guid Id)
         {
-            throw new NotImplementedException();
+            return Orders.Find(o => o.Id == Id);
         }
     }
 }
