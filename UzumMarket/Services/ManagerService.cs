@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UzumMarket.Models.Roles;
 using UzumMarket.Services.IServices;
 
@@ -131,6 +132,61 @@ namespace UzumMarket.Services
 
 
 
+        /* -------------------- Update Position Of Sellers --------------------- */
+
+        public string UpdateSalaryOfSellers()
+        {
+            List<Seller> sellers = SellerService.Sellers;
+            if (sellers.Count <= 0)
+            {
+                return "No sellers available";
+            }
+            Console.WriteLine("---------------- Available Sellers -----------------------");
+            foreach (var item in sellers)
+            {
+                Console.WriteLine
+                (
+                    $" Id: {item.Id},\n" +
+                    $" First Name: {item.FirstName},\n" +
+                    $" Last Name: {item.LastName},\n" +
+                    $" Password: {item.Password},\n" +
+                    $" Email: {item.Email},\n" +
+                    $" Position: {item.Position},\n" +
+                    $" Salary: {item.Salary}"
+                );
+            }
+
+            Console.WriteLine("Enter the ID of the seller you want to UpdateSalary: ");
+            string idInput = Console.ReadLine();
+            Guid id;
+            if (!Guid.TryParse(idInput, out id))
+            {
+                return "Invalid ID format";
+            }
+
+            Seller seller = sellers.FirstOrDefault(s => s.Id == id);
+            if (seller == null)
+            {
+                return "Seller not found";
+            }
+
+            Console.WriteLine("Enter the new salary for the seller: ");
+            string salaryInput = Console.ReadLine();
+            decimal salary;
+            if (!decimal.TryParse(salaryInput, out salary))
+            {
+                return "Invalid salary format";
+            }
+            if (salary < 0)
+            {
+                return "Salary cannot be negative";
+            }
+            seller.Salary = salary;
+
+            return "UpdateSalaryOfSeller management is successful";
+        }
+
+
 
 
         public string DeleteCustomers()
@@ -209,9 +265,6 @@ namespace UzumMarket.Services
             throw new NotImplementedException();
         }
 
-        public string UpdateSalaryOfSellers()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
