@@ -42,16 +42,11 @@ Loyiha quyidagi asosiy OOP komponentlariga ega:
 | Polymorphism     | `DisplayInfo()` metodini overloading va overriding qilish |
 | Abstraction       | `IProductService` interfeysi orqali umumiy metodlarni ta’riflash |
 
----
-
-## 🧪 Ishga Tushurish
-
-1. Loyihani Visual Studio’da oching
-2. `Program.cs` faylidan dasturni `Run` qiling
-3. Konsol orqali buyruqlarni kiriting (raqamlar yordamida)
 
 ---
+## 📂 Loyihani Ishga Tushurish
 
+   git clone https://github.com/username/uzum-market.git
 
 
 
