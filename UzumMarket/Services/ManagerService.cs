@@ -723,6 +723,32 @@ namespace UzumMarket.Services
         }
 
 
+
+        /* ------------------- GetAllOrders ---------------------- */
+
+        public string GetAllOrders()
+        {
+            List<Order> orders = OrderService.Orders;
+            if (orders.Count <= 0)
+            {
+                return "No orders available";
+            }
+
+            Console.WriteLine("---------------- Available Orders -----------------------");
+            foreach (var order in orders)
+            {
+                Console.WriteLine
+                (
+                    $" Id: {order.Id},\n" +
+                    $" Product ID: {order.ProductId},\n" +
+                    $" Quantity: {order.Quantity},\n" +
+                    $" Order Date: {order.OrderDate}"
+                );
+            }
+
+            return "GetAllOrders management is successful";
+        }
+
         public string DeleteOrder()
         {
             throw new NotImplementedException();
@@ -731,10 +757,7 @@ namespace UzumMarket.Services
         
 
        
-        public string GetAllOrders()
-        {
-            throw new NotImplementedException();
-        }
+       
 
        
         
