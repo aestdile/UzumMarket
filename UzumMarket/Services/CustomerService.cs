@@ -21,11 +21,7 @@ namespace UzumMarket.Services
        
         
 
-        public string ManageOrders()
-        {
-            throw new NotImplementedException();
-        }
-
+       
         public string Register(Customer customer)
         {
             Console.Clear();
@@ -402,6 +398,88 @@ namespace UzumMarket.Services
 
 
         public List<Customer> GetAllCustomers() => Customers;
+
+
+        /* --------------- Manage Orders -------------- */
+
+        public string ManageOrders()
+        {
+
+            Console.Clear();
+            Console.WriteLine("\n-------------- Manage Orders --------------\n");
+
+            OrderService orderService = new OrderService();
+            Console.WriteLine("Please select an option:");
+
+            while (true)
+            {
+                Console.WriteLine("---------------------------------------------------");
+                Console.WriteLine("1. Add Order");
+                Console.WriteLine("2. Delete Order");
+                Console.WriteLine("3. Get All Orders");
+                Console.WriteLine("4. Deposit");
+                Console.WriteLine("5. Exit");
+                Console.WriteLine("---------------------------------------------------");
+
+                Console.Write("Select an option: ");
+                string action = Console.ReadLine();
+                Console.WriteLine();
+
+                switch (action)
+                {
+                    case "1":
+                        Console.WriteLine(orderService.AddOrder());
+                        break;
+
+                    case "2":
+                        Console.Write("Enter Order ID to delete: ");
+                        Guid orderId = Guid.Parse(Console.ReadLine());
+                        while (true)
+                        {
+                            if (OrderService.Orders.Any(o => o.Id == orderId))
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                Console.Write("Order not found. Please enter a valid Order ID: ");
+                                orderId = Guid.Parse(Console.ReadLine());
+                            }
+                        }
+                        Console.WriteLine(orderService.DeleteOrder(orderId));
+                        break;
+
+                    case "3":
+                        var orders = OrderService.Orders;
+                        if (orders.Count == 0)
+                        {
+                            Console.WriteLine("No orders available.");
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("---------------------------------------------------");
+                            foreach (var order in orders)
+                            {
+                                Console.WriteLine($"Order ID: {order.Id}, Product ID: {order.ProductId}, Quantity: {order.Quantity}");
+                            }
+                            Console.WriteLine("---------------------------------------------------");
+                        }
+                        break;
+
+                    case "4":
+                        Console.WriteLine(Deposit());
+                        break;
+
+                    case "5":
+                        return "Exiting order management.";
+
+                    default:
+                        Console.WriteLine("Invalid option. Please try again.");
+                        break;
+                }
+            }
+        }
 
 
 
