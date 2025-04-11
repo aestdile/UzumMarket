@@ -264,6 +264,33 @@ namespace UzumMarket.Services
         }
 
 
+
+
+        /* ------------------- GetAllCustomers ---------------------- */
+
+
+        public string GetAllCustomers()
+        {
+
+            List<Customer> customers = CustomerService.Customers;
+            if (customers.Count <= 0)
+            {
+                return "No customers available";
+            }
+            Console.WriteLine("---------------- Available Customers -----------------------");
+            foreach (var customer in customers)
+            {
+                Console.WriteLine
+                (
+                    $" Id: {customer.Id},\n" +
+                    $" First Name: {customer.FirstName},\n" +
+                    $" Last Name: {customer.LastName},\n"
+                );
+            }
+
+            return "GetAllCustomers management is successful";
+        }
+
         public string DeleteCustomers()
         {
             throw new NotImplementedException();
@@ -281,11 +308,7 @@ namespace UzumMarket.Services
 
         
 
-        public string GetAllCustomers()
-        {
-            throw new NotImplementedException();
-        }
-
+       
         public string GetAllOrders()
         {
             throw new NotImplementedException();
