@@ -187,6 +187,48 @@ namespace UzumMarket.Services
         }
 
 
+        /* -------------------- Delete Seller --------------------- */
+
+        public string DeleteSeller()
+        {
+            List<Seller> sellers = SellerService.Sellers;
+            if (sellers.Count <= 0)
+            {
+                return "No sellers available";
+            }
+            Console.WriteLine("---------------- Available Sellers -----------------------");
+            foreach (Seller seller in sellers)
+            {
+                Console.WriteLine
+                (
+                    $" Id: {seller.Id},\n" +
+                    $" First Name: {seller.FirstName},\n" +
+                    $" Last Name: {seller.LastName},\n" +
+                    $" Password: {seller.Password},\n" +
+                    $" Email: {seller.Email},\n" +
+                    $" Position: {seller.Position},\n" +
+                    $" Salary: {seller.Salary}"
+                );
+            }
+
+            Console.WriteLine("Enter the ID of the seller you want to delete: ");
+            string idInput = Console.ReadLine();
+            Guid id;
+            if (!Guid.TryParse(idInput, out id))
+            {
+                return "Invalid ID format";
+            }
+            Seller sellerToDelete = sellers.FirstOrDefault(s => s.Id == id);
+            if (sellerToDelete == null)
+            {
+                return "Seller not found";
+            }
+            sellers.Remove(sellerToDelete);
+            Console.WriteLine($"Seller with ID {id} has been deleted successfully.");
+
+            return "DeleteSeller management is successful";
+        }
+
 
 
         public string DeleteCustomers()
@@ -204,10 +246,7 @@ namespace UzumMarket.Services
             throw new NotImplementedException();
         }
 
-        public string DeleteSeller()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public string GetAllCustomers()
         {
