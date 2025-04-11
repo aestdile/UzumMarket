@@ -12,16 +12,7 @@ namespace UzumMarket.Services
     public class CustomerService : ICustomerService
     {
         public static List<Customer> Customers { get; set; } = new List<Customer>();
-
-        public string Deposit()
-        {
-            throw new NotImplementedException();
-        }
-
-       
-        
-
-       
+               
         public string Register(Customer customer)
         {
             Console.Clear();
@@ -481,6 +472,78 @@ namespace UzumMarket.Services
             }
         }
 
+
+        /* --------------- Deposit -------------- */
+        public string Deposit()
+        {
+            Console.WriteLine("\n--------------- Deposit -----------------\n");
+
+            Customers.ForEach(c =>
+            {
+                Console.WriteLine(
+                    $"Customer ID: {c.Id}," +
+                    $" FirstName: {c.FirstName}, " +
+                    $" LastName: {c.LastName}, " +
+                    $" Balance: {c.Balance}"
+                );
+            });
+
+            Console.Write("\nEnter Customer ID to deposit to: ");
+            string inputId = Console.ReadLine();
+            Guid customerId;
+            while (true)
+            {
+                if (Guid.TryParse(inputId, out customerId))
+                {
+                    if (Customers.Any(c => c.Id == customerId))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.Write("Customer not found. Please enter a valid Customer ID: ");
+                    }
+                }
+                else
+                {
+                    Console.Write("Invalid ID format. Please enter a valid Customer ID: ");
+                }
+                inputId = Console.ReadLine();
+            }
+
+
+            var customer = Customers.First(c => c.Id == customerId);
+
+            Console.Write("Enter Deposit Amount: ");
+            string depositInput = Console.ReadLine();
+            decimal depositAmount;
+
+            while (true)
+            {
+                if (decimal.TryParse(depositInput, NumberStyles.Any, CultureInfo.InvariantCulture, out depositAmount))
+                {
+                    if (depositAmount > 0)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.Write("Deposit must be greater than 0. Try again: ");
+                    }
+                }
+                else
+                {
+                    Console.Write("Invalid amount. Enter a valid number: ");
+                }
+                depositInput = Console.ReadLine();
+            }
+
+            customer.Balance += depositAmount;
+
+            Console.WriteLine($"\nDeposit successful! New Balance: {customer.Deposit}");
+
+            return "Balance is changed successfully!";
+        }
 
 
 
