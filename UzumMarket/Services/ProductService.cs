@@ -690,6 +690,21 @@ namespace UzumMarket.Services
 
 
 
+        /* ----------------- Get Product By Factory --------------------  */
+
+        public List<Product> GetProductsByFactory(string factoryName)
+        {
+            List<Product> productsByFactory = Products.Where(p => p.FactoryName.Equals(factoryName, StringComparison.OrdinalIgnoreCase)).ToList();
+            if (productsByFactory.Count > 0)
+            {
+                return productsByFactory;
+            }
+            else
+            {
+                Console.WriteLine("No products found from this factory.");
+                return null;
+            }
+        }
 
         public Product GetProductById(Guid Id)
         {
@@ -698,11 +713,7 @@ namespace UzumMarket.Services
 
         
 
-        public List<Product> GetProductsByFactory(string factoryName)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         
     }
 }
