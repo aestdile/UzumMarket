@@ -231,6 +231,39 @@ namespace UzumMarket.Services
 
 
 
+        /* ------------------- Management Customer ---------------------  */
+
+
+        public string ManageCustomer()
+        {
+            while (true)
+            {
+                Console.WriteLine("1. GetAllCustomers");
+                Console.WriteLine("2. DeleteCustomers");
+                Console.WriteLine("3. Exit\n");
+                Console.WriteLine("Choice an option (1 / 2 / 3): ");
+                Console.WriteLine();
+                string action = Console.ReadLine();
+                switch (action)
+                {
+                    case "1":
+                        GetAllCustomers();
+                        break;
+                    case "2":
+                        DeleteCustomers();
+                        break;
+                    case "3":
+                        return "Exiting customer management...";
+                    default:
+                        Console.WriteLine("Invalid choice, please try again.");
+                        break;
+                }
+            }
+
+            return "Customer management is successful";
+        }
+
+
         public string DeleteCustomers()
         {
             throw new NotImplementedException();
@@ -270,10 +303,7 @@ namespace UzumMarket.Services
             throw new NotImplementedException();
         }
 
-        public string ManageCustomer()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         
 
