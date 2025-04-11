@@ -23,10 +23,7 @@ namespace UzumMarket.Services
             throw new NotImplementedException();
         }
 
-        public string Login()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public string ManageOrders()
         {
@@ -344,6 +341,65 @@ namespace UzumMarket.Services
             return "Customer registered successfully!";
         }
 
+
+        /* --------------- Login -------------- */
+
+        public string Login()
+        {
+            Console.Clear();
+
+            Console.WriteLine("\n-------------- Customer Login --------------\n");
+
+            Console.Write("Email: ");
+            string email = Console.ReadLine();
+            while (true)
+            {
+                if (string.IsNullOrWhiteSpace(email))
+                {
+                    Console.WriteLine("Email cannot be empty. Please try again: ");
+                }
+                else if (!email.Contains("@") || !email.Contains("."))
+                {
+                    Console.WriteLine("Email must contain '@' and '.' characters. Please try again: ");
+                }
+                else
+                {
+                    break;
+                }
+                email = Console.ReadLine();
+            }
+
+
+            Console.Write("Password: ");
+            string password = Console.ReadLine();
+            while (true)
+            {
+                if (string.IsNullOrWhiteSpace(password))
+                {
+                    Console.WriteLine("Password cannot be empty. Please try again: ");
+                }
+                else if (password.Length < 8)
+                {
+                    Console.WriteLine("Password must be at least 8 characters long. Please try again: ");
+                }
+                else
+                {
+                    break;
+                }
+                password = Console.ReadLine();
+            }
+
+            var customer = Customers.FirstOrDefault(c => c.Email == email && c.Password == password);
+            if (customer != null)
+            {
+                return "Login successful!";
+            }
+            else
+            {
+                Console.WriteLine("Invalid email or password. Please try again.");
+                return "Invalid Input. Email or password is incorrect!";
+            }
+        }
 
     }
 }
