@@ -53,6 +53,52 @@ namespace UzumMarket.Services
         }
 
 
+        /* -------------------- Seller Management --------------------- */
+
+        public string ManageSeller()
+        {
+            Console.Clear();
+
+            /* -------------- All Sellers ---------------- */
+
+            while (true)
+            {
+                Console.WriteLine("1. GetAllSellers");
+                Console.WriteLine("2. UpdateSalaryOfSellers");
+                Console.WriteLine("3. UpdatePositionOfSellers");
+                Console.WriteLine("4. DeleteSellers");
+                Console.WriteLine("5. Exit\n");
+                Console.WriteLine("Choice an option (1 / 2 / 3 / 4): ");
+                Console.WriteLine();
+                string action = Console.ReadLine();
+
+                switch (action)
+                {
+                    case "1":
+                        GetAllSellers();
+                        break;
+                    case "2":
+                        UpdateSalaryOfSellers();
+                        break;
+                    case "3":
+                        UpdatePositionOfSellers();
+                        break;
+                    case "4":
+                        DeleteSeller();
+                        break;
+                    case "5":
+                        return "Exiting seller management...";
+                    default:
+                        Console.WriteLine("Invalid choice, please try again.");
+                        break;
+                }
+            }
+
+            return "SellerManagement is successful";
+        }
+
+
+
         public string DeleteCustomers()
         {
             throw new NotImplementedException();
@@ -115,10 +161,7 @@ namespace UzumMarket.Services
             throw new NotImplementedException();
         }
 
-        public string ManageSeller()
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public string Register(Manager manager)
         {
