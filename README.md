@@ -1,4 +1,4 @@
 # 🛒 Uzum Market - Online Do'kon
 
-##git clone 
+#git clone 
 https://github.com/aestdile/UzumMarket.git
