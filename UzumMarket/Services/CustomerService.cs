@@ -18,11 +18,7 @@ namespace UzumMarket.Services
             throw new NotImplementedException();
         }
 
-        public List<Customer> GetAllCustomers()
-        {
-            throw new NotImplementedException();
-        }
-
+       
         
 
         public string ManageOrders()
@@ -400,6 +396,15 @@ namespace UzumMarket.Services
                 return "Invalid Input. Email or password is incorrect!";
             }
         }
+
+
+        /* ----------------- Get All Customers ------------------------- */
+
+
+        public List<Customer> GetAllCustomers() => Customers;
+
+
+
 
     }
 }
