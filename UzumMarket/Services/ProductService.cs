@@ -653,13 +653,21 @@ namespace UzumMarket.Services
 
 
 
-
-
+        /* ----------------- Delete Product --------------------  */
 
 
         public string DeleteProduct(Guid Id)
         {
-            throw new NotImplementedException();
+            Product product = Products.FirstOrDefault(p => p.Id == Id);
+            if (product != null)
+            {
+                Products.Remove(product);
+                return "Product is successfully deleted!";
+            }
+            else
+            {
+                return "Product not found!";
+            }
         }
 
         public Product GetProductById(Guid Id)
