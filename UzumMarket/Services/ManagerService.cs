@@ -749,6 +749,80 @@ namespace UzumMarket.Services
             return "GetAllOrders management is successful";
         }
 
+
+
+        /* ------------------- UpdateOrder ---------------------- */
+
+        public string UpdateOrder()
+        {
+
+            List<Order> orders = OrderService.Orders;
+
+            if (orders.Count <= 0)
+            {
+                return "No orders available";
+            }
+
+            Console.WriteLine("---------------- Available Orders -----------------------");
+
+            foreach (var order in orders)
+            {
+                Console.WriteLine
+                (
+                    $" Id: {order.Id},\n" +
+                    $" Product ID: {order.ProductId},\n" +
+                    $" Quantity: {order.Quantity},\n" +
+                    $" Order Date: {order.OrderDate}"
+                );
+            }
+
+            Console.WriteLine("Enter the ID of the order you want to update: ");
+            string idInput = Console.ReadLine();
+            Guid id;
+            if (!Guid.TryParse(idInput, out id))
+            {
+                return "Invalid ID format";
+            }
+
+            Order orderToUpdate = orders.FirstOrDefault(o => o.Id == id);
+            if (orderToUpdate == null)
+            {
+                return "Order not found";
+            }
+
+            Console.WriteLine("Enter the new quantity for the order: ");
+            string quantityInput = Console.ReadLine();
+            int quantity;
+            if (!int.TryParse(quantityInput, out quantity))
+            {
+                return "Invalid quantity format";
+            }
+            if (quantity < 0)
+            {
+                return "Quantity cannot be negative";
+            }
+            orderToUpdate.Quantity = quantity;
+
+            Console.WriteLine("Enter the new order date for the order (yyyy-mm-dd): ");
+            string orderDateInput = Console.ReadLine();
+            DateTime orderDate;
+            if (!DateTime.TryParse(orderDateInput, out orderDate))
+            {
+                return "Invalid order date format";
+            }
+            if (orderDate > DateTime.Now)
+            {
+                return "Order date cannot be in the future";
+            }
+            orderToUpdate.OrderDate = orderDate;
+            Console.WriteLine("Order updated successfully!");
+
+
+            return "UpdateOrder management is successful";
+        }
+
+
+
         public string DeleteOrder()
         {
             throw new NotImplementedException();
@@ -781,11 +855,7 @@ namespace UzumMarket.Services
             throw new NotImplementedException();
         }
 
-        public string UpdateOrder()
-        {
-            throw new NotImplementedException();
-        }
-
+        
       
         
     }
