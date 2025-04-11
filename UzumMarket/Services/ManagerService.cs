@@ -332,6 +332,51 @@ namespace UzumMarket.Services
             return "DeleteCustomers management is successful";
         }
 
+
+
+        /* ------------------ Manage Products --------------------  */
+
+        public string ManageProduct()
+        {
+            while (true)
+            {
+                Console.WriteLine("1. GetAllProducts");
+                Console.WriteLine("2. UpdateProduct");
+                Console.WriteLine("3. DeleteProduct");
+                Console.WriteLine("4. Exit\n");
+                Console.WriteLine("Choice an option (1 / 2 / 3): ");
+                Console.WriteLine();
+                string action = Console.ReadLine();
+                switch (action)
+                {
+                    case "1":
+                        GetAllProducts();
+                        break;
+                    case "2":
+                        UpdateProduct();
+                        break;
+                    case "3":
+                        DeleteProduct();
+                        break;
+                    case "4":
+                        return "Exiting product management...";
+                    default:
+                        Console.WriteLine("Invalid choice, please try again.");
+                        break;
+                }
+            }
+
+            return "Product management is successful";
+        }
+
+
+
+
+
+
+
+
+
         public string DeleteOrder()
         {
             throw new NotImplementedException();
@@ -371,10 +416,7 @@ namespace UzumMarket.Services
             throw new NotImplementedException();
         }
 
-        public string ManageProduct()
-        {
-            throw new NotImplementedException();
-        }
+        
 
        
 
