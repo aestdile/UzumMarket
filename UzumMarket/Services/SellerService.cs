@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UzumMarket.Models;
 using UzumMarket.Models.Roles;
 using UzumMarket.Services.IServices;
 
@@ -10,13 +9,6 @@ namespace UzumMarket.Services
 {
     public class SellerService : ISellerService
     {
-        
-        
-
-        public string ManageProducts()
-        {
-            throw new NotImplementedException();
-        }
 
         public static List<Seller> Sellers { get; set; } = new List<Seller>();
 
@@ -297,8 +289,112 @@ namespace UzumMarket.Services
             return Sellers;
         }
 
+        /* --------------- ManageProducts ---------------- */
 
+        /* ---------------- ManageProducts ------------------*/
+        public string ManageProducts()
+        {
+            Console.Clear();
+            ProductService productService = new ProductService();
+            Console.WriteLine("Welcome to the Product Management System!\n");
+            Console.WriteLine("Please select an option from the menu below:");
 
+            while (true)
+            {
+                Console.WriteLine("---------------------------------------------------");
+                Console.WriteLine("1. Add Product");
+                Console.WriteLine("2. Update Product");
+                Console.WriteLine("3. Delete Product");
+                Console.WriteLine("4. Get All Products");
+                Console.WriteLine("5. Get Product by Id");
+                Console.WriteLine("6. Exit");
+                Console.WriteLine("---------------------------------------------------");
 
+                Console.Write("Select an option: ");
+                string option = Console.ReadLine();
+                Console.WriteLine();
+
+                switch (option)
+                {
+                    case "1":
+                        Console.WriteLine(productService.AddProduct(new Product()));
+                        break;
+
+                    case "2":
+                        Console.Write("Product Id to update: ");
+                        Guid updateProductId = Guid.Parse(Console.ReadLine());
+                        Product existingProduct = productService.GetProductById(updateProductId);
+                        if (existingProduct != null)
+                        {
+                            Console.WriteLine(productService.UpdateProduct(existingProduct));
+                        }
+                        break;
+
+                    case "3":
+                        Console.Write("Product Id to delete: ");
+                        Guid deleteProductId = Guid.Parse(Console.ReadLine());
+                        Console.WriteLine(productService.DeleteProduct(deleteProductId));
+                        break;
+
+                    case "4":
+                        var products = productService.GetAllProducts();
+                        if (products.Count > 0)
+                        {
+                            foreach (var product in products)
+                            {
+                                Console.WriteLine
+                                (
+                                    $" Id: {product.Id},\n" +
+                                    $" Name: {product.Name},\n" +
+                                    $" Description: {product.Description},\n" +
+                                    $" Price: {product.Price},\n" +
+                                    $" Category: {product.Category},\n" +
+                                    $" Factory: {product.FactoryName},\n" +
+                                    $" Made Date: {product.MadeDate},\n" +
+                                    $" Expire Date: {product.ExpireDate}"
+                                );
+                            }
+                            Console.WriteLine();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Products are not found!");
+                        }
+                        break;
+
+                    case "5":
+                        Console.Write("Product Id to Get By Id: ");
+                        Guid getProductId = Guid.Parse(Console.ReadLine());
+                        Product foundProduct = productService.GetProductById(getProductId);
+                        if (foundProduct != null)
+                        {
+                            Console.WriteLine
+                            (
+                                $" Id: {foundProduct.Id},\n" +
+                                $" Name: {foundProduct.Name},\n" +
+                                $" Description: {foundProduct.Description},\n" +
+                                $" Price: {foundProduct.Price},\n" +
+                                $" Count: {foundProduct.Count},\n" +
+                                $" Category: {foundProduct.Category},\n" +
+                                $" Factory: {foundProduct.FactoryName},\n" +
+                                $" Made Date: {foundProduct.MadeDate},\n" +
+                                $" Expire Date: {foundProduct.ExpireDate}"
+                            );
+                        }
+                        else
+                        {
+                            Console.WriteLine("Products are not found!");
+                        }
+                        break;
+
+                    case "6":
+                        return "Exiting the Product Management System...";
+
+                    default:
+                        Console.WriteLine("Invalid option! Please try again.");
+                        break;
+                }
+            }
+        }
     }
 }
