@@ -688,6 +688,39 @@ namespace UzumMarket.Services
         }
 
 
+        /* ------------------- Manage Orders ---------------------- */
+
+        public string ManageOrder()
+        {
+            while (true)
+            {
+                Console.WriteLine("1. GetAllOrders");
+                Console.WriteLine("2. UpdateOrder");
+                Console.WriteLine("3. DeleteOrder");
+                Console.WriteLine("4. Exit\n");
+                Console.WriteLine("Choice an option (1 / 2 / 3): ");
+                Console.WriteLine();
+                string action = Console.ReadLine();
+                switch (action)
+                {
+                    case "1":
+                        GetAllOrders();
+                        break;
+                    case "2":
+                        UpdateOrder();
+                        break;
+                    case "3":
+                        DeleteOrder();
+                        break;
+                    case "4":
+                        return "Exiting order management...";
+                    default:
+                        Console.WriteLine("Invalid choice, please try again.");
+                        break;
+                }
+            }
+            return "Order management is successful";
+        }
 
 
         public string DeleteOrder()
@@ -715,11 +748,7 @@ namespace UzumMarket.Services
 
         
 
-        public string ManageOrder()
-        {
-            throw new NotImplementedException();
-        }
-
+        
         
 
        
