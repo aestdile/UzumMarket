@@ -291,9 +291,45 @@ namespace UzumMarket.Services
             return "GetAllCustomers management is successful";
         }
 
+
+
+        /* ------------------- DeleteCustomers ---------------------- */
+
         public string DeleteCustomers()
         {
-            throw new NotImplementedException();
+            List<Customer> customers = CustomerService.Customers;
+            if (customers.Count <= 0)
+            {
+                return "No customers available";
+            }
+            Console.WriteLine("---------------- Available Customers to Delete-----------------------");
+            foreach (var customer in customers)
+            {
+                Console.WriteLine
+                (
+                    $" Id: {customer.Id},\n" +
+                    $" First Name: {customer.FirstName},\n" +
+                    $" Last Name: {customer.LastName},\n"
+                );
+            }
+
+            Console.WriteLine("Enter the ID of the customer you want to delete: ");
+            string idInput = Console.ReadLine();
+            Guid id;
+            if (!Guid.TryParse(idInput, out id))
+            {
+                return "Invalid ID format";
+            }
+
+            Customer customerToDelete = customers.FirstOrDefault(c => c.Id == id);
+            if (customerToDelete == null)
+            {
+                return "Customer not found";
+            }
+            customers.Remove(customerToDelete);
+            Console.WriteLine($"Customer with ID {id} has been deleted successfully.\n");
+
+            return "DeleteCustomers management is successful";
         }
 
         public string DeleteOrder()
