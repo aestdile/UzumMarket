@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using UzumMarket.Models.Roles;
 
 namespace UzumMarket.Services.IServices
 {
-    class ISellerService
+    public interface ISellerService
     {
+        public string Register(Seller seller);
+        public string Login();
+        public string ManageProducts();
+        public List<Seller> GetAllSellers();
     }
 }

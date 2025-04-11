@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UzumMarket.Models;
+
 
 namespace UzumMarket.Services.IServices
 {
-    class IOrderService
+    public interface IOrderService
     {
+        public string AddOrder();
+        public string DeleteOrder(Guid Id);
+        public Order GetOrderById(Guid Id);
+        public List<Order> GetAllOrders();
     }
 }

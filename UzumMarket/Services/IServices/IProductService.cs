@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UzumMarket.Models;
 
 namespace UzumMarket.Services.IServices
 {
-    class IProductService
+    public interface IProductService
     {
+        public string AddProduct(Product product);
+        public string UpdateProduct(Product product);
+        public string DeleteProduct(Guid Id);
+        public Product GetProductById(Guid Id);
+        public List<Product> GetAllProducts();
+        public List<Product> GetProductsByCategory(string category);
+        public List<Product> GetProductsByFactory(string factoryName);
+
     }
 }
