@@ -26,7 +26,7 @@ Loyiha quyidagi asosiy OOP komponentlariga ega:
 ---
 ## 📂 Loyihani Ishga Tushurish
 
-   git clone https://github.com/aestdile/uzum-market.git
+   git clone https://github.com/aestdile/UzumMarket.git
 
 
 
